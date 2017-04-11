@@ -11,6 +11,10 @@ World = function( id, x, y ){
 }
 
 
+/*
+	Create a certain number of ants and place them
+	randomly on the world (only one ant per cell).
+*/
 World.prototype.populate = function( antNumber ){
 	var randX = 0;
 	var randY = 0;
@@ -37,7 +41,8 @@ World.prototype.populate = function( antNumber ){
 
 
 /*
-	Return the list of Ants at the given position
+	Return the list of Ants at the given position.
+	(It should always return an Array !)
 */
 World.prototype.getAntAt = function( x, y ){
 	var result = [];
@@ -54,7 +59,10 @@ World.prototype.getAntAt = function( x, y ){
 }
 
 
-
+/*
+	Call this function (for example with setIntervcal)
+	to make the world living (each ant will move one time).
+*/
 World.prototype.doLiving = function(){
 	var ant;
 
@@ -68,6 +76,9 @@ World.prototype.doLiving = function(){
 }
 
 
+/*
+	Calling this function will generate or refresh the HTML page.
+*/
 World.prototype.generateHTML = function(){
 	var dom = $(this.id);
 	var row = $('<tr>');
@@ -106,13 +117,20 @@ World.prototype.debug = function(){
 
 
 
+
+
+
 /*--[ Ant object ]--------------------------------------------------*/
 
 Ant = function( x, y, world ){
 	this.name = "fourmi";
 	this.x = x;
 	this.y = y;
+
+	// The ant needs to know the world characteristics where it lives
+	// because when it moves, the ant musn't go outside the world
 	this.world = world;
+
 	this.html = this.chooseAName();
 }
 
